@@ -37,28 +37,27 @@ Route::get('/dashboard', function(){
 
 Route::group(['prefix' => 'student'], function(){
 
-    Route::get('/{id}', function($id){
-        return"<a href='".route('studentEdit', $id)."'>Edit</a>";
-    });
-
     Route::get('/edit/{id}', function($id){
-        //return view('students.edit',compact('id'));   //mabilisan and matrack
+        //return view('students.edit',compact('id', 'name'));   //mabilisan and matrack
         //return view('students.edit',['studentId'=>'1234']); //for hardcoded
         return view('students.edit',['studentId'=>$id]);
     })->name('studentEdit');
 
     Route::get('/{id}/{name}', function($id, $name){
-        return"<h2>".$id.$name."</h2>";
+        return view('students.idname', ['studentId'=>$id, 'studentName'=>$name]);
     });
 
+    Route::get('/{id}', function($id){
+        return view('students.id', ['studentId'=>$id]);
+    })->where('id', '[0-9]+'); // added constraint to accept only numbers
+
     Route::get('/{name}', function($name){
-        return"<h2>".$name."</h2>";
-    });
+        return view('students.name', ['studentName'=>$name]);
+    })->where('name', '[A-Za-z]+'); // added constaint to accept only letters 
 
     // Route::get('/edit/{id}', function($id){
     //     return "<h2> EDIT STUDENT: ".$id."</h2>";
     // })->name('studentEdit');
-
 
 });
 
@@ -69,6 +68,4 @@ Route::group(['prefix' => 'student'], function(){
 Route::fallback(function(){
     return redirect()->route('dashboard');      //if u want an unknown route to redirect to home
 });
-
-
 
