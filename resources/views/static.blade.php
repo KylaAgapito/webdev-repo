@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <!-- NAVBAR FOR PRICING-->
+    <!-- NAVBAR FOR PRICING -->
+    <!-- I used Bootstrap's navbar code and modified it, especially with the right-most nav links -->
     <div class="row">
         <div class="shadow-lg">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -41,23 +42,34 @@
         <div class="row align-items-start">
 
             <div class="mt-5 p-3 col-md-4 border bg-body-secondary">
-                <div class="mb-2 p-3 row">
-                    <label for="staticEmail" class="col-md-2 col-form-label">Email</label>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
                     <div class="col-sm-8">
-                        <input type="text" readonly class="form-control-plaintext bg-light" id="staticEmail" value="email@example.com">
+                        <input type="email" class="form-control" id="staticEmail" value="email@example.com">
                     </div>
                 </div>
-                <div class="mb-2 p-3 row">
-                    <label for="inputPassword" class="col-md-2 col-form-label">Password</label>
-                    <div class="col-md-8">
+
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Password</label>
+                    <div class="col-sm-8">
                         <input type="password" class="form-control" id="inputPassword">
                     </div>
                 </div>
-                <div class="row">
+
+                <!-- good but pwede pa maimprove -->
+                <!-- <div class="row mt-2">
                     <div class="col-md-4"></div>
                     <button class="col-md-4 bg-light">Login</button>
                     <div class="col-md-4"><a href="#">Forgot Password?</a></div>
+                </div> -->
+
+                <div class="mb-3 row text-end">
+                    <div class="col-12">
+                        <button class="btn bg-light me-3">Login</button>
+                        <a href="#">Forgot Password?</a>
+                    </div>
                 </div>
+
             </div>
 
             <div class="col-md-8">
@@ -73,24 +85,25 @@
                 </div>
 
                 <div class="row">
-                    <div class="card p-3 col-md-4 border">
+                    <div class="card p-3 col-md-4 ">
                         <img class="img-fluid" src="{{ asset('image/cow.png') }}" alt="Cow">
                     </div>
-                    <div class="card p-3 col-md-4 border">
+                    <div class="card p-3 col-md-4 ">
                         <img class="img-fluid" src="{{ asset('image/cow.png') }}" alt="Cow">
                     </div>
-                    <div class="card p-3 col-md-4 border">
+                    <div class="card p-3 col-md-4 ">
                         <img class="img-fluid" src="{{ asset('image/cow.png') }}" alt="Cow">
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="card p-3 col-md-4 border">
+                    <div class="card p-3 col-md-4 ">
                         <img class="img-fluid" src="{{ asset('image/cow.png') }}" alt="Cow">
                     </div>
-                    <div class="card p-3 col-md-4 border">
+                    <div class="card p-3 col-md-4 ">
                         <img class="img-fluid" src="{{ asset('image/cow.png') }}" alt="Cow">
                     </div>
-                    <div class="card p-3 col-md-4 border">
+                    <div class="card p-3 col-md-4 ">
                         <img class="img-fluid" src="{{ asset('image/cow.png') }}" alt="Cow">
                     </div>
                 </div>
