@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" 
-    content="width=device-width, initial-scale=1.0">
-    <title>ID Page</title>
-</head>
-<body>
+@extends('template.main')
+
+@section ('content')
+<div class="container">
     <a href=".route('studentEdit', $id).">Edit</a>
-</body>
-</html>
+</div>
+@endsection

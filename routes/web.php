@@ -1,26 +1,39 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [UserController::class, 'welcome']);
+
+// Route::get('/home', function () {
+//     return view('home');
+// })->name('home');
+
+Route::get('/home/{id}', [UserController::class, 'index'])->name('home');
+Route::get('/home', [UserController::class, 'filter']);
+
+// ?name=Kyla&age=4
+// /home?name=Kyla&age=4
+
 
 // Route::get('/dashboard', function(){
 //     return"<h1> This is a dashboard! </h1>";
 // })->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
-Route::get('/static', function () {
-    return view('static');
-})->name('static');
+// Route::get('/static', function () {
+//     return view('static');
+// })->name('static');
+
+Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+Route::get('/static', [UserController::class, 'static']);
 
 // Route::get('/student/{id}', function($id){
 //     return"<a href='".route('studentEdit', $id)."'>Edit</a>";
@@ -41,23 +54,28 @@ Route::get('/static', function () {
 
 Route::group(['prefix' => 'student'], function () {
 
-    Route::get('/edit/{id}', function ($id) {
-        //return view('students.edit',compact('id', 'name'));   //mabilisan and matrack
-        //return view('students.edit',['studentId'=>'1234']); //for hardcoded
-        return view('students.edit', ['studentId' => $id]);
-    })->name('studentEdit');
+    Route::get('/edit/{id}', [UserController::class, 'editId']);
+    Route::get('/{id}/{name}', [UserController::class, 'idName']);
+    Route::get('/{id}', [UserController::class, 'id'])->where('id', '[0-9]+');
+    Route::get('/{name}', [UserController::class, 'name'])->where('name', '[A-Za-z]+');
 
-    Route::get('/{id}/{name}', function ($id, $name) {
-        return view('students.idname', ['studentId' => $id, 'studentName' => $name]);
-    });
+    //Route::get('/edit/{id}', function ($id) {
+    //return view('students.edit',compact('id', 'name'));   //mabilisan and matrack
+    //return view('students.edit',['studentId'=>'1234']); //for hardcoded
+    //return view('students.edit', ['studentId' => $id]);
+    //})->name('studentEdit');
 
-    Route::get('/{id}', function ($id) {
-        return view('students.id', ['studentId' => $id]);
-    })->where('id', '[0-9]+'); // added constraint to accept only numbers
+    // Route::get('/{id}/{name}', function ($id, $name) {
+    //     return view('students.idname', ['studentId' => $id, 'studentName' => $name]);
+    // });
 
-    Route::get('/{name}', function ($name) {
-        return view('students.name', ['studentName' => $name]);
-    })->where('name', '[A-Za-z]+'); // added constaint to accept only letters 
+    //Route::get('/{id}', function ($id) {
+    //return view('students.id', ['studentId' => $id]);
+    //})->where('id', '[0-9]+'); // added constraint to accept only numbers
+
+    //Route::get('/{name}', function ($name) {
+    //return view('students.name', ['studentName' => $name]);
+    //})->where('name', '[A-Za-z]+'); // added constaint to accept only letters 
 
     // Route::get('/edit/{id}', function($id){
     //     return "<h2> EDIT STUDENT: ".$id."</h2>";
@@ -69,6 +87,8 @@ Route::group(['prefix' => 'student'], function () {
 //     return "Route Not Exist";
 // });
 
-Route::fallback(function () {
-    return redirect()->route('dashboard');      //if u want an unknown route to redirect to home
-});
+Route::fallback([UserController::class, 'fallbackRoute']);
+
+// Route::fallback(function () {
+//     return redirect()->route('dashboard');
+// });

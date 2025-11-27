@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID and Name Page</title>
-</head>
-<body>
+@extends ('template.main')
+
+@section('content')
+<div class="container">
     <h2> {{ $studentId }} {{ $studentName }}</h2>
-</body>
-</html>
+</div>
+@endsection
