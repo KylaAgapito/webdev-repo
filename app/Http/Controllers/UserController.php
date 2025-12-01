@@ -65,6 +65,16 @@ class UserController extends Controller
         return view('students.name', ['studentName' => $name]);
     }
 
+    public function student()
+    {
+        return view('student');
+    }
+
+    public function temp()
+    {
+        return view('temp');
+    }
+
     public function fallbackRoute()
     {
         return redirect()->route('dashboard');
