@@ -8,8 +8,11 @@ Route::get('/home/{id}', [UserController::class, 'index'])->name('home');
 Route::get('/home', [UserController::class, 'filter']);
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 Route::get('/static', [UserController::class, 'static']);
-Route::get('/student', [UserController::class, 'student']); //Route for Activity 2
+Route::get('/student', [UserController::class, 'student']);
 Route::get('/temp', [UserController::class, 'temp']);
+
+Route::post('/studentAdd', [UserController::class, 'addStudent'])->name('student.add');
+
 
 Route::group(['prefix' => 'student'], function () {
 
@@ -18,5 +21,7 @@ Route::group(['prefix' => 'student'], function () {
     Route::get('/{id}', [UserController::class, 'id'])->where('id', '[0-9]+');
     Route::get('/{name}', [UserController::class, 'name'])->where('name', '[A-Za-z]+');
 });
+
+
 
 Route::fallback([UserController::class, 'fallbackRoute']);

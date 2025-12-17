@@ -13,6 +13,24 @@ class UserController extends Controller
         // return $id;
     }
 
+    public function addStudent(Request $request)
+    {
+        Log::info('======================>>> ENTER STUDENT CONTROLLER');
+        $request->validate([
+            'emailAddress' => ['required', 'email', 'ends_with:@iskolarngbayan.pup.edu.ph'],
+            'firstName' => ['required', 'min:1', 'max:50'],
+            'lastName' => ['required', 'min:1', 'max:50'],
+            'middleName' => ['required', 'min:1', 'max:50']
+        ], [
+            'firstName.required' => 'engot k talaga',
+            'firstName.max' => 'sumosobra k na'
+        ]);
+
+        Log::info('======================>>> EXIT STUDENT CONTROLLER');
+    }
+
+
+
     public function filter(Request $request)
     {
         log::info("==============ENTER FILTER");
@@ -74,6 +92,8 @@ class UserController extends Controller
     {
         return view('temp');
     }
+
+
 
     public function fallbackRoute()
     {

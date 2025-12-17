@@ -1,0 +1,26 @@
+1. execute this in bash
+composer create-project laravel/laravel myproject
+
+2. edit .env file, change database to file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
+
+3. go to resources folder, then add a "sass" folder inside it, with an app.scss file in it too with this code inside
+@import "bootstrap/scss/bootstrap";
+
+4. change the vite.config.js and locate "tailwinndcss()" then comment it out
+
+5. run "npm install" command in powerhshell
+
+6. run "npm install -D sass-embedded" powershell
+
+7. run "npm install bootstrap" in powershell
+
+8. run "npm install bootstrap @popperjs/core" in powershell
+
+9. run "npm run dev" in powershell (OPTIONAL ATA DI KO SURE AJKSHDKJA)
+
+10. try to run the server using "php artisan serve" in powershell
