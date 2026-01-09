@@ -60,13 +60,14 @@
         </div>
     </div>
     <div class="container p-5 border border-1 mt-5 shadow mb-5 bg-body rounded">
-        @if ($errors->any)
+        @if ($errors->any())
         @foreach ($errors->all() as $error)
-        <div class=" alert alert-danger">{{ $error }}</div>
+        <div class=" alert alert-danger">{{ $error }}</div> <!--creates a customized laravel warning-->
         @endforeach
         @endif
 
         <form method="POST" action="{{ route('student.add') }}">
+            <!--pang-security or hash-->
             @csrf
 
             <header class="row pt-2">

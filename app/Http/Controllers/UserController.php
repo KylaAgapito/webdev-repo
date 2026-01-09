@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -12,6 +15,13 @@ class UserController extends Controller
         return view('home');
         // return $id;
     }
+
+    public function getUser()
+    {
+        $result = DB::table('user')->get();
+        return $result;
+    }
+
 
     public function addStudent(Request $request)
     {
@@ -26,9 +36,44 @@ class UserController extends Controller
             'firstName.max' => 'sumosobra k na'
         ]);
 
+        //ddeclare yung variables
+        $firstName = $request->input('firstName');
+        $lastName = $request->input('lastName');
+        $middleName = $request->input('middleName');
+        $email = $request->input('emailAddress');
+        // $age = $this->calculateAge($request->input('dateofBirth'));
+
+        $password = $this->generatePassword();
+
+        DB::table('user')->insert(
+            [
+                // 'email' => $email,
+                // 'first_name' => $firstName,
+                // 'last_name' => $lastName,
+                // 'middle_name' => $middleName
+
+                'first_name' => $request->input('firstName'),
+                'last_name' => $request->input('lastName'),
+                'middle_name' => $request->input('middleName'),
+                'email' => $request->input('emailAddress'),
+                'password' => $this->encryptPassword($password)
+
+            ]
+        );
+
         Log::info('======================>>> EXIT STUDENT CONTROLLER');
+        //return view('student.addStudent', compact('firstName', 'lastName'));
     }
 
+    public function generatePassword()
+    {
+        return Str::random(12);
+    }
+
+    public function encryptPassword($password)
+    {
+        return Hash::make($password);
+    }
 
 
     public function filter(Request $request)

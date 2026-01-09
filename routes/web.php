@@ -10,8 +10,7 @@ Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard'
 Route::get('/static', [UserController::class, 'static']);
 Route::get('/student', [UserController::class, 'student']);
 Route::get('/temp', [UserController::class, 'temp']);
-
-Route::post('/studentAdd', [UserController::class, 'addStudent'])->name('student.add');
+Route::get('/user', [UserController::class, 'getUser']);
 
 
 Route::group(['prefix' => 'student'], function () {
@@ -20,8 +19,9 @@ Route::group(['prefix' => 'student'], function () {
     Route::get('/{id}/{name}', [UserController::class, 'idName']);
     Route::get('/{id}', [UserController::class, 'id'])->where('id', '[0-9]+');
     Route::get('/{name}', [UserController::class, 'name'])->where('name', '[A-Za-z]+');
+    Route::post('/studentAdd', [UserController::class, 'addStudent'])->name('student.add');
+    //NOTE: post routes cant be accessed directly
 });
-
 
 
 Route::fallback([UserController::class, 'fallbackRoute']);
