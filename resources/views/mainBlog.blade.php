@@ -12,7 +12,6 @@
         .form-container {
             position: relative;
             padding-bottom: 4rem;
-            /* reserve space for the absolute button */
         }
 
         .form-actions {
@@ -54,6 +53,17 @@
             <div class="col-md-5 pt-2">
                 <label for="author" class="form-label">Author</label>
                 <input type="text" class="form-control" id="author" name="author" placeholder="Last Name, First Name M.I">
+            </div>
+        </div>
+        <div class="row pt-2">
+            <label for="category">Category</label>
+            <div class="col-md-5 pt-2">
+                <select class="form-select" aria-label="Default select example" name="category">
+                    <option selected>Select a Category</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->id }} - {{ $category->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="pt-3 form-actions">

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\category;
+use App\Models\Blog;
 
 class UserController extends Controller
 {
@@ -75,39 +77,53 @@ class UserController extends Controller
         return Hash::make($password);
     }
 
+    //returns the main blog forms
     public function mainBlog()
     {
-        return view('mainBlog');
+        // $categories = DB::table('categories')->get();
+        $categories = category::all();
+        return view('mainBlog', compact('categories'));
     }
 
     public function blogJSON()
     {
-        $result = DB::table('blog_posts')->get();
+        $result = DB::table('blog_posts as b')->join('categories as c', 'c.id', '=', 'b.category_id')
+            ->select('b.*', 'c.name')
+            ->get();
         return $result;
     }
 
     public function blogSave(Request $request)
     {
         Log::info('======================>>> ENTER BLOG CONTROLLER');
-
         $request->validate([
             'title' => ['required', 'min:1', 'max:50'],
             'content' => ['required', 'min:1', 'max:500'],
             'timestamps' => ['required'],
-            'author' => ['required', 'min:1', 'max:50']
+            'author' => ['required', 'min:1', 'max:50'],
+            'category' => ['required']
         ], [
-            'title.min' => 'Title must have a minimum of 1 character.',
             'content.max' => 'Content has reached the maximum 200 character limit.',
             'author.max' => 'Author has reached the 50 character limit.'
         ]);
 
 
-        DB::table('blog_posts')->insert([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'timestamps' => $request->input('timestamps'),
-            'author' => $request->input('author')
-        ]);
+        // DB::table('blog_posts')->insert([
+        //     'title' => $request->input('title'),
+        //     'content' => $request->input('content'),
+        //     'timestamps' => $request->input('timestamps'),
+        //     'author' => $request->input('author'),
+        //     'category_id' => $request->input('category')
+        // ]);
+
+        $blog = new Blog();
+        $blog->title = $request->title;
+        $blog->timestamps = $request->timestamps;
+        $blog->content = $request->content;
+        $blog->author = $request->author;
+        $blog->category_id = $request->category;
+
+        $blog->save();
 
         Log::info('======================>>> EXIT BLOG CONTROLLER');
         return redirect('/blog');
