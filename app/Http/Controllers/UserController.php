@@ -75,6 +75,43 @@ class UserController extends Controller
         return Hash::make($password);
     }
 
+    public function mainBlog()
+    {
+        return view('mainBlog');
+    }
+
+    public function blogJSON()
+    {
+        $result = DB::table('blog_posts')->get();
+        return $result;
+    }
+
+    public function blogSave(Request $request)
+    {
+        Log::info('======================>>> ENTER BLOG CONTROLLER');
+
+        $request->validate([
+            'title' => ['required', 'min:1', 'max:50'],
+            'content' => ['required', 'min:1', 'max:500'],
+            'timestamps' => ['required'],
+            'author' => ['required', 'min:1', 'max:50']
+        ], [
+            'title.min' => 'Title must have a minimum of 1 character.',
+            'content.max' => 'Content has reached the maximum 200 character limit.',
+            'author.max' => 'Author has reached the 50 character limit.'
+        ]);
+
+
+        DB::table('blog_posts')->insert([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'timestamps' => $request->input('timestamps'),
+            'author' => $request->input('author')
+        ]);
+
+        Log::info('======================>>> EXIT BLOG CONTROLLER');
+        return redirect('/blog');
+    }
 
     public function filter(Request $request)
     {

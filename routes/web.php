@@ -11,6 +11,8 @@ Route::get('/static', [UserController::class, 'static']);
 Route::get('/student', [UserController::class, 'student']);
 Route::get('/temp', [UserController::class, 'temp']);
 Route::get('/user', [UserController::class, 'getUser']);
+Route::get('/mainBlog', [UserController::class, 'mainBlog']); //main blog forms
+Route::get('/blog', [UserController::class, 'blogJSON']); // pang-display ng json
 
 
 Route::group(['prefix' => 'student'], function () {
@@ -21,6 +23,10 @@ Route::group(['prefix' => 'student'], function () {
     Route::get('/{name}', [UserController::class, 'name'])->where('name', '[A-Za-z]+');
     Route::post('/studentAdd', [UserController::class, 'addStudent'])->name('student.add');
     //NOTE: post routes cant be accessed directly
+});
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::post('/save', [UserController::class, 'blogSave'])->name('blogSave'); //post route ng blog
 });
 
 

@@ -24,3 +24,12 @@ SESSION_DOMAIN=null
 9. run "npm run dev" in powershell (OPTIONAL ATA DI KO SURE AJKSHDKJA)
 
 10. try to run the server using "php artisan serve" in powershell
+
+    Develop a basic Blog module in Laravel. 
+    Begin by creating a migration for a blog_posts table that includes 
+    the fields: id, title, content, and timestamps and author.
+
+    Proceed to design a Blade view containing a form with input fields for the blog title and content, 
+    and configure it to submit via a POST request to /blog/save. 
+    In this route, implement data insertion into the database using the insert. 
+    After the data is saved, redirect the user to the /blog route, where all posts shall be retrieved and presented as JSON.

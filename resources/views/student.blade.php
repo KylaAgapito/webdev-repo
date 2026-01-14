@@ -20,7 +20,7 @@
 
         .separator {
             border-bottom: 2px solid;
-            margin: 10px;
+            margin: 12px;
         }
 
         .footer {
@@ -59,7 +59,7 @@
             </nav>
         </div>
     </div>
-    <div class="container p-5 border border-1 mt-5 shadow mb-5 bg-body rounded">
+    <div class="container p-5 border mt-5 shadow mb-5 bg-body rounded">
         @if ($errors->any())
         @foreach ($errors->all() as $error)
         <div class=" alert alert-danger">{{ $error }}</div> <!--creates a customized laravel warning-->
