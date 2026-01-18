@@ -33,3 +33,62 @@ SESSION_DOMAIN=null
     and configure it to submit via a POST request to /blog/save. 
     In this route, implement data insertion into the database using the insert. 
     After the data is saved, redirect the user to the /blog route, where all posts shall be retrieved and presented as JSON.
+
+
+1. execute this in bash
+composer create-project laravel/laravel myproject
+
+2. edit .env file, change database to file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
+
+3. go to resources folder, then add a "sass" folder inside it, with an app.scss file in it too with this code inside
+@import "bootstrap/scss/bootstrap";
+ 
+4. change the vite.config.js and locate "tailwinndcss()" then comment it out
+
+5. run "npm install" command in powerhshell
+
+6. run "npm install -D sass-embedded" powershell
+
+7. run "npm install bootstrap" in powershell
+
+8. run "npm install bootstrap @popperjs/core" in powershell
+
+9. run "npm run dev" in powershell (OPTIONAL ATA DI KO SURE AJKSHDKJA)
+
+10. try to run the server using "php artisan serve" in powershell
+
+
+==================== N O T E S ====================
+1. UserController acts as the better router than using return in the web.php.
+This should be located in the app/Http/Controllers.
+To make another controller: php artisan make:controller ControllerName
+NOTE: add "use App\Http\Controllers\UserController;" in  web.php
+
+1.1 also add this to any blade.php file that uses the external templates in the internet
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+2. To use templates effectively, do the following things:
+    a. in the /resources folder, make a template folder
+    b. make a template file with blade.php as extension
+    c. this will serve as the "main" file for any repetitive assets
+       that other blade.php files need (such as navbars) 
+    FILE 1: THE MASTER TEMPLATE FILE
+        -- have the following code for the insertion of content
+            <div class="container">
+                @yield('content');
+            </div>
+    FILE 2: OTHER FILES USING THE TEMPLATE
+    @extends('template.main') <--- template.main is the loc of the template file
+
+    @section('content')  <--- content is the specific place u want the content to have
+    @endsection
+
+
+3. Backend txt file
+
+

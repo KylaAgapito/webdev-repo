@@ -10,5 +10,5 @@ class Blog extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $table = 'blog_posts';
+    protected $table = 'blog_posts2';
 }

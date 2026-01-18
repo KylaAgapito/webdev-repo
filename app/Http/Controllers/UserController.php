@@ -87,7 +87,7 @@ class UserController extends Controller
 
     public function blogJSON()
     {
-        $result = DB::table('blog_posts as b')->join('categories as c', 'c.id', '=', 'b.category_id')
+        $result = DB::table('blog_posts2 as b')->join('categories as c', 'c.id', '=', 'b.category_id')
             ->select('b.*', 'c.name')
             ->get();
         return $result;
